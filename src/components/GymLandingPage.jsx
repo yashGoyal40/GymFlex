@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -12,6 +12,16 @@ import useScroll from "@/hooks/useScroll";
 export default function GymLandingPage({ activeSection, setActiveSection }) {
   const { showBackToTop } = useScroll();
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Create refs for each section
+  const sectionsRef = {
+    home: useRef(null),
+    services: useRef(null),
+    classes: useRef(null),
+    trainers: useRef(null),
+    testimonials: useRef(null),
+    contact: useRef(null),
+  };
 
   // Handle Dark Mode Persistence
   useEffect(() => {
@@ -43,22 +53,58 @@ export default function GymLandingPage({ activeSection, setActiveSection }) {
     { name: "Contact", href: "#contact" },
   ];
 
+  // Set up the intersection observer
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id; // Assuming each section has an id
+          setActiveSection(id); // Update active section
+        }
+      });
+    }, { threshold: 0.5 }); // Adjust threshold as necessary
+
+    // Observe each section
+    Object.values(sectionsRef).forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    // Cleanup observer on unmount
+    return () => {
+      observer.disconnect();
+    };
+  }, [setActiveSection]);
+
   return (
     <div className={`min-h-screen font-sans ${isDarkMode ? "dark" : ""}`}>
       <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
         <Navbar
           navItems={navItems}
           activeSection={activeSection}
-          setActiveSection={setActiveSection} // Pass setActiveSection here
+          setActiveSection={setActiveSection}
           toggleDarkMode={toggleDarkMode}
           isDarkMode={isDarkMode}
         />
-        <HeroSection />
-        <ServicesSection />
-        <ClassesSection />
-        <TrainersSection />
-        <TestimonialsSection />
-        <ContactSection />
+        <div ref={sectionsRef.home} id="home">
+          <HeroSection />
+        </div>
+        <div ref={sectionsRef.services} id="services">
+          <ServicesSection />
+        </div>
+        <div ref={sectionsRef.classes} id="classes">
+          <ClassesSection />
+        </div>
+        <div ref={sectionsRef.trainers} id="trainers">
+          <TrainersSection />
+        </div>
+        <div ref={sectionsRef.testimonials} id="testimonials">
+          <TestimonialsSection />
+        </div>
+        <div ref={sectionsRef.contact} id="contact">
+          <ContactSection />
+        </div>
         <BackToTopButton />
       </div>
     </div>

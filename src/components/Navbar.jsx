@@ -4,13 +4,19 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ navItems, activeSection, setActiveSection, toggleDarkMode, isDarkMode }) => {
+const Navbar = ({
+  navItems,
+  activeSection,
+  setActiveSection,
+  toggleDarkMode,
+  isDarkMode,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Smooth Scroll Handler
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const target = document.querySelector(href);
+    console.log(`Scrolling to: ${href}`, target); // Debug log
     if (target) {
       window.scrollTo({
         top: target.offsetTop - 80, // Adjust for navbar height
@@ -18,6 +24,8 @@ const Navbar = ({ navItems, activeSection, setActiveSection, toggleDarkMode, isD
       });
       setActiveSection(href.slice(1)); // Update active section
       setIsMenuOpen(false);
+    } else {
+      console.error(`Target not found for ${href}`); // Log error if target is not found
     }
   };
 
@@ -83,16 +91,17 @@ const Navbar = ({ navItems, activeSection, setActiveSection, toggleDarkMode, isD
             transition={{ duration: 0.3 }}
           >
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-500 transition-colors duration-300 ${
-                  activeSection === item.href.slice(1) ? "text-indigo-500 font-semibold" : ""
+                onClick={(e) => handleNavClick(e, item.href)} // Use button to call the same function
+                className={`block px-4 py-2 text-left w-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-500 transition-colors duration-300 ${
+                  activeSection === item.href.slice(1)
+                    ? "text-indigo-500 font-semibold"
+                    : ""
                 }`}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <Button
               onClick={toggleDarkMode}
