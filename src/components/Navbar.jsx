@@ -16,16 +16,13 @@ const Navbar = ({
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const target = document.querySelector(href);
-    console.log(`Scrolling to: ${href}`, target); // Debug log
     if (target) {
       window.scrollTo({
-        top: target.offsetTop - 80, // Adjust for navbar height
+        top: target.offsetTop - 80, 
         behavior: "smooth",
       });
-      setActiveSection(href.slice(1)); // Update active section
+      setActiveSection(href.slice(1)); 
       setIsMenuOpen(false);
-    } else {
-      console.error(`Target not found for ${href}`); // Log error if target is not found
     }
   };
 
