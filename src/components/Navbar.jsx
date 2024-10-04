@@ -1,11 +1,10 @@
-// src/components/Navbar.jsx
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ navItems, activeSection, toggleDarkMode, isDarkMode }) => {
+const Navbar = ({ navItems, activeSection, setActiveSection, toggleDarkMode, isDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Smooth Scroll Handler
@@ -17,6 +16,7 @@ const Navbar = ({ navItems, activeSection, toggleDarkMode, isDarkMode }) => {
         top: target.offsetTop - 80, // Adjust for navbar height
         behavior: "smooth",
       });
+      setActiveSection(href.slice(1)); // Update active section
       setIsMenuOpen(false);
     }
   };
@@ -87,20 +87,22 @@ const Navbar = ({ navItems, activeSection, toggleDarkMode, isDarkMode }) => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-500 transition-colors duration-300"
+                className={`block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-indigo-500 transition-colors duration-300 ${
+                  activeSection === item.href.slice(1) ? "text-indigo-500 font-semibold" : ""
+                }`}
               >
                 {item.name}
               </a>
             ))}
             <Button
               onClick={toggleDarkMode}
-              className="mt-4 mx-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 w-full flex items-center justify-center sm:w-auto sm:p-5 sm:mx-2 sm:mt-0"
+              className="mt-4 mx-auto p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 w-10 h-10 flex items-center justify-center"
               aria-label="Toggle Dark Mode"
             >
               {isDarkMode ? (
-                <Sun className="w-5 h-5 sm:w-4 sm:h-4 text-yellow-400" />
+                <Sun className="w-5 h-5 text-yellow-400" />
               ) : (
-                <Moon className="w-5 h-5 sm:w-4 sm:h-4 text-gray-800" />
+                <Moon className="w-5 h-5 text-gray-800" />
               )}
             </Button>
           </motion.div>

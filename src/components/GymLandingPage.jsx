@@ -1,4 +1,3 @@
-// src/components/GymLandingPage.jsx
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -10,8 +9,8 @@ import ContactSection from "@/components/ContactSection";
 import BackToTopButton from "@/components/BackToTopButton";
 import useScroll from "@/hooks/useScroll";
 
-export default function GymLandingPage() {
-  const { activeSection, showBackToTop } = useScroll();
+export default function GymLandingPage({ activeSection, setActiveSection }) {
+  const { showBackToTop } = useScroll();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Handle Dark Mode Persistence
@@ -46,25 +45,20 @@ export default function GymLandingPage() {
 
   return (
     <div className={`min-h-screen font-sans ${isDarkMode ? "dark" : ""}`}>
-      {/* Background */}
       <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
-        {/* Navbar */}
         <Navbar
           navItems={navItems}
           activeSection={activeSection}
+          setActiveSection={setActiveSection} // Pass setActiveSection here
           toggleDarkMode={toggleDarkMode}
           isDarkMode={isDarkMode}
         />
-
-        {/* Sections */}
         <HeroSection />
         <ServicesSection />
         <ClassesSection />
         <TrainersSection />
         <TestimonialsSection />
         <ContactSection />
-
-        {/* Back to Top Button */}
         <BackToTopButton />
       </div>
     </div>
