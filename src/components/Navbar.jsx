@@ -17,12 +17,14 @@ const Navbar = ({
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 80, 
-        behavior: "smooth",
-      });
-      setActiveSection(href.slice(1)); 
-      setIsMenuOpen(false);
+      setIsMenuOpen(false); 
+      setTimeout(() => {
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: "smooth",
+        });
+        setActiveSection(href.slice(1)); 
+      }, 500);
     }
   };
 

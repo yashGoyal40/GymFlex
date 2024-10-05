@@ -11,7 +11,7 @@ import useScroll from "@/hooks/useScroll";
 
 export default function GymLandingPage({ activeSection, setActiveSection }) {
   const { showBackToTop } = useScroll();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Create refs for each section
   const sectionsRef = {
