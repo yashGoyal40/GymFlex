@@ -18,8 +18,7 @@ const classesData = [
   },
   {
     title: "Pilates",
-    description:
-      "Strengthen your core with our focused Pilates workouts.",
+    description: "Strengthen your core with our focused Pilates workouts.",
     image: "./assets/pilates.jpeg",
   },
   {
@@ -31,6 +30,7 @@ const classesData = [
 ];
 
 const ClassesSection = () => {
+  // Store API instance to control carousel manually
   const [carouselApi, setCarouselApi] = useState(null);
 
   return (
@@ -45,9 +45,9 @@ const ClassesSection = () => {
         >
           Our Classes
         </motion.h2>
-        
+
         {/* Carousel with button control */}
-        <Carousel className="space-y-6 sm:space-y-8 relative" setApi={setCarouselApi} opts={{ draggable: false }}>
+        <Carousel className="space-y-6 sm:space-y-8" setApi={setCarouselApi} opts={{ draggable: false }}>
           <CarouselContent className="flex space-x-4 sm:space-x-6">
             {classesData.map((classItem, index) => (
               <CarouselItem
@@ -59,7 +59,7 @@ const ClassesSection = () => {
                   alt={classItem.title}
                   className="w-full h-full object-cover rounded-md shadow-lg"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 to-gray-900/90 p-4 sm:p-6 rounded-md flex flex-col justify-end">
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 to-gray-900/90 p-8 sm:p-8  rounded-md flex flex-col justify-end">
                   <h3 className="text-base sm:text-lg font-bold text-indigo-500">
                     {classItem.title}
                   </h3>
@@ -70,14 +70,14 @@ const ClassesSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          
+
           {/* Carousel navigation buttons */}
-          <div className="absolute inset-0 flex justify-between items-center">
+          <div className="flex justify-between items-center mt-4">
             <CarouselPrevious>
-              <ChevronRight className="rotate-180 w-6 h-6 sm:w-8 sm:h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2" />
+              <ChevronRight className="rotate-180 w-8 h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
             </CarouselPrevious>
             <CarouselNext>
-              <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2" />
+              <ChevronRight className="w-8 h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
             </CarouselNext>
           </div>
         </Carousel>
