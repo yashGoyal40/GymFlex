@@ -149,15 +149,15 @@ const CarouselItem = React.forwardRef(({ className, ...props }, ref) => {
 CarouselItem.displayName = "CarouselItem"
 
 const CarouselPrevious = React.forwardRef(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    (<Button
+    <Button
       ref={ref}
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75", 
+        "absolute h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-700 hover:bg-opacity-75", 
         orientation === "horizontal"
           ? "left-2 top-1/2 -translate-y-1/2 sm:left-4"
           : "top-2 left-1/2 -translate-x-1/2 sm:top-4 rotate-90", 
@@ -166,23 +166,24 @@ const CarouselPrevious = React.forwardRef(({ className, variant = "outline", siz
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}>
-      <ArrowLeftIcon className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+      {/* Fixed color for the icon */}
+      <ArrowLeftIcon className="h-4 w-4 sm:h-6 sm:w-6" style={{ color: "white !important" }} />
       <span className="sr-only">Previous slide</span>
-    </Button>)
+    </Button>
   );
-})
-CarouselPrevious.displayName = "CarouselPrevious"
+});
+CarouselPrevious.displayName = "CarouselPrevious";
 
 const CarouselNext = React.forwardRef(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
-    (<Button
+    <Button
       ref={ref}
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75", 
+        "absolute h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-700 hover:bg-opacity-75", 
         orientation === "horizontal"
           ? "right-2 top-1/2 -translate-y-1/2 sm:right-4"
           : "bottom-2 left-1/2 -translate-x-1/2 sm:bottom-4 rotate-90", 
@@ -191,11 +192,13 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}>
-      <ArrowRightIcon className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+      {/* Fixed color for the icon */}
+      <ArrowRightIcon className="h-4 w-4 sm:h-6 sm:w-6" style={{ color: "white !important" }} />
       <span className="sr-only">Next slide</span>
-    </Button>)
+    </Button>
   );
-})
-CarouselNext.displayName = "CarouselNext"
+});
+CarouselNext.displayName = "CarouselNext";
+
 
 export { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };

@@ -47,7 +47,11 @@ const ClassesSection = () => {
         </motion.h2>
 
         {/* Carousel with button control */}
-        <Carousel className="space-y-6 sm:space-y-8" setApi={setCarouselApi} opts={{ draggable: false }}>
+        <Carousel
+          className="space-y-6 sm:space-y-8"
+          setApi={setCarouselApi}
+          opts={{ draggable: false }}
+        >
           <CarouselContent className="flex space-x-4 sm:space-x-6">
             {classesData.map((classItem, index) => (
               <CarouselItem
@@ -74,10 +78,10 @@ const ClassesSection = () => {
           {/* Carousel navigation buttons */}
           <div className="flex justify-between items-center mt-4">
             <CarouselPrevious>
-              <ChevronRight className="rotate-180 w-8 h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
+              <ChevronRight className="rotate-180 w-8 h-8 text-white hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
             </CarouselPrevious>
             <CarouselNext>
-              <ChevronRight className="w-8 h-8 text-gray-100 hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
+              <ChevronRight className="w-8 h-8 text-white hover:text-indigo-500 transition-colors duration-300 cursor-pointer" />
             </CarouselNext>
           </div>
         </Carousel>
