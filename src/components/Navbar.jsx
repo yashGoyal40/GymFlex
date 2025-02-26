@@ -39,7 +39,7 @@ const Navbar = ({
               className="h-full w-auto"
             />
           </span>
-          <span className="text-xl font-bold">GymFlex</span>
+          <span className="text-xl font-bold">GymFlexs</span>
         </Link>
 
         <div className="hidden md:flex space-x-6 items-center">
